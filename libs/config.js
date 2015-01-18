@@ -1,7 +1,7 @@
 var request = require("request");
 
 var config = {
-  _token: true;
+  _token: true
 };
 
 var privateConfig = {};
@@ -23,19 +23,18 @@ var api = {
   MODIFY_CARD: "https://api.weixin.qq.com/card/update",
   DELETE_CARD: "https://api.weixin.qq.com/card/delete",
   MODIFY_CARD_STOCK: "https://api.weixin.qq.com/card/modifystock",
-  MODIFY_LUCK_MONEY_BALANCE: "https://api.weixin.qq.com/card/luckymoney/updateuserbalance",
   CREATE_CARD_QR_CODE_TICKET: "https://api.weixin.qq.com/card/qrcode/create",
   SHOW_CARD_QR_CODE: "https://mp.weixin.qq.com/cgi-bin/showqrcode",
-  // CREATE_CARD_SHORT_URL: "https://api.weixin.qq.com/card/sms/geturl",
   
   // CODE
   CONSUME_CODE: "https://api.weixin.qq.com/card/code/consume",
   GET_CODE_DETAIL: "https://api.weixin.qq.com/card/code/get",
   CODE_DECRYPT: "https://api.weixin.qq.com/card/code/decrypt",
   SET_CODE_EXPIRE: "https://api.weixin.qq.com/card/code/unavailable",
+  MODIFY_LUCK_MONEY_BALANCE: "https://api.weixin.qq.com/card/luckymoney/updateuserbalance",
 
   // OTHER
-  COLOR: "https://api.weixin.qq.com/card/getcolors",
+  COLORS: "https://api.weixin.qq.com/card/getcolors",
   SET_WHITELIST: "https://api.weixin.qq.com/card/testwhitelist/set"
 
 };
@@ -87,8 +86,8 @@ function formatUrl(url, callback) {
     if(privateConfig.accessToken && isNotExpire()) {
       return returnsFunc({access_token: privateConfig.accessToken}, callback);
     }
-    var url = api.ACCESS_TOKEN + "&appid=" + config.appId + "&secret=" + config.appSecret;
-    request.post(url, function(err, res, body) {
+    var accessTokenUrl = api.ACCESS_TOKEN + "&appid=" + config.appId + "&secret=" + config.appSecret;
+    request.post(accessTokenUrl, function(err, res, body) {
       if(err) {
         return callback(err);
       }

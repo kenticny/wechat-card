@@ -1,3 +1,7 @@
 module.exports = {
-  shop: require("./api/shop")
-}
+  basic: require("./api/basic"),
+  shop: require("./api/shop"),
+  card: require("./api/card"),
+  code: require("./api/code"),
+  setConfig: require("./config").setConfig
+};
