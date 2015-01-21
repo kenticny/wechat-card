@@ -2,12 +2,22 @@ var config = require("../config");
 var request = require("../utils/request");
 var error = require("../utils/errors");
 
+/**
+ * get current access token (获取当前的access token)
+ * @param  {Function} callback(error, accessToken)
+ */
+exports.getAccessToken = function(callback) {
+  callback = callback || function() {};
+  config.getAccessToken(callback);
+};
+
+/**
+ * get current api ticket (获取当前api ticket，用于JSAPI计算签名)
+ * @param  {Function} callback(error, ticket)
+ */
 exports.getApiTicket = function(callback) {
   callback = callback || function() {};
-  request.get(config.api.API_TICKET + "&type=wx_card", function(err, result) {
-    if(err) {return callback(err); }
-    
-  });
+  config.getApiTicket(callback);
 };
 
 /**

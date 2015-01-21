@@ -1,10 +1,15 @@
 var request = require("request");
 
+var error = require("./utils/errors");
+
 var config = {
   _token: true
 };
 
-var privateConfig = {};
+var privateConfig = {
+  access_token: {},
+  jsapi_ticket: {}
+};
 
 var api = {
 
@@ -68,7 +73,7 @@ function setPrivateConfig(key, value) {
  */
 function isNotExpire(type) {
   var op = privateConfig[type];
-  if(Date.now - op.expireTime > 3600000) {
+  if(Date.now() - op.expireTime > 3600000) {
     return false;
   }
   return true;
@@ -82,10 +87,12 @@ function isNotExpire(type) {
 function getAccessToken(callback) {
 
   // parse response and return access token
-  var returnsFunc = function(body, callback) {
+  var returnsFunc = function(body, isNew, callback) {
     var token = (typeof body === "string") ? 
           JSON.parse(body).access_token : body.access_token;
-    setPrivateConfig("access_token", {cred: token, expireTime: Date.now });
+    if(isNew) {
+      setPrivateConfig("access_token", {cred: token, expireTime: Date.now() });
+    }
     callback(null, token);
     return;
   };
@@ -95,25 +102,59 @@ function getAccessToken(callback) {
 
     // from wechat server
     if(privateConfig.access_token.cred && isNotExpire("access_token")) {
-      return returnsFunc({access_token: privateConfig.access_token.cred}, callback);
+      return returnsFunc({access_token: privateConfig.access_token.cred }, false, callback);
     }
     var accessTokenUrl = api.ACCESS_TOKEN + "&appid=" + config.appId + "&secret=" + config.appSecret;
     request.post(accessTokenUrl, function(err, res, body) {
       if(err) {
-        return callback(err);
+        return callback(error.REQUEST_ERROR(err));
       }
-      returnsFunc(body, callback);
+      returnsFunc(body, true, callback);
     });
   }else {
 
     // from custom server
     request.get(config.accessTokenService, function(err, res, body) {
       if(err) {
-        return callback(err);
+        return callback(error.REQUEST_ERROR(err));
       }
-      returnsFunc(body, callback);
+      returnsFunc(body, false, callback);
     });
   }
+}
+
+/**
+ * get jsapi ticket
+ * @param  {Function} callback(error, ticket)
+ */
+function getApiTicket(callback) {
+
+  // parse the response object and return ticket
+  var returnsFunc = function(body, isNew, callback) {
+    var token = (typeof body === "string") ? 
+          JSON.parse(body).ticket : body.ticket;
+    if(isNew) {
+      setPrivateConfig("jsapi_ticket", {cred: token, expireTime: Date.now() });
+    }
+    callback(null, token);
+    return;
+  };
+
+  // get ticket if not expire
+  if(privateConfig.jsapi_ticket.cred && isNotExpire("jsapi_ticket")) {
+    return returnsFunc({ticket: privateConfig.jsapi_ticket.cred }, false, callback);
+  }
+
+  // request jsapi ticket if it expired
+  formatUrl(api.API_TICKET, function(err, url) {
+    if(err) {return callback(err); }
+    request.get(url + "&type=wx_card", function(err, res, body) {
+      if(err) {
+        return callback(error.REQUEST_ERROR(err));
+      }
+      returnsFunc(body, true, callback);
+    });
+  });
 }
 
 /**
@@ -131,7 +172,8 @@ function formatUrl(url, callback) {
 module.exports = {
   getConfig: getConfig,
   setConfig: setConfig,
-  setPrivateConfig: setPrivateConfig,
+  getApiTicket: getApiTicket,
+  getAccessToken: getAccessToken,
   getUrl: formatUrl,
   api: api
 };
