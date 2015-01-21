@@ -2,6 +2,11 @@ var config = require("../config");
 var request = require("../utils/request");
 var error = require("../utils/errors");
 
+/**
+ * create a wechat card (创建卡券)
+ * @param  {object}   card     [card info 卡券信息]
+ * @param  {Function} callback(error, cardid)
+ */
 exports.createCard = function(card, callback) {
   if(typeof card !== "object" || typeof callback !== "function") {
     return callback(error.MISSING_PARAMS());
@@ -36,6 +41,11 @@ exports.createCard = function(card, callback) {
   });
 };
 
+/**
+ * get card detail info by card id (通过cardid获取卡券详细信息)
+ * @param  {string}   cardId   [card id 卡券id]
+ * @param  {Function} callback(error, card)
+ */
 exports.getCardDetail = function(cardId, callback) {
   if(typeof cardId !== "string" || typeof callback !== "function") {
     return callback(error.MISSING_PARAMS());
@@ -58,6 +68,12 @@ exports.getCardDetail = function(cardId, callback) {
   });
 };
 
+/**
+ * get card id list, just ids (获取卡券id列表, 仅有卡券id)
+ * @param  {number}   offset   [the id list start at offset 列表的起始位置]
+ * @param  {number}   count    [the quantity of list 列表数量]
+ * @param  {Function} callback(error, ids)
+ */
 exports.getCardIdList = function(offset, count, callback) {
 
   // set the default parameters
@@ -81,6 +97,11 @@ exports.getCardIdList = function(offset, count, callback) {
 
 };
 
+/**
+ * modify card info (修改卡券信息)
+ * @param  {object}   card     [new card info 卡券信息]
+ * @param  {Function} callback(error)
+ */
 exports.modifyCard = function(card, callback) {
   if(typeof card !== "object" || typeof callback !== "function") {
     return callback(error.MISSING_PARAMS());
@@ -120,6 +141,11 @@ exports.modifyCard = function(card, callback) {
 
 };
 
+/**
+ * delete card by card id (通过cardid删除卡券)
+ * @param  {string}   cardId   [card id 卡券id]
+ * @param  {Function} callback(error)
+ */
 exports.deleteCard = function(cardId, callback) {
   if(typeof cardId !== "string" || typeof callback !== "function") {
     return callback(error.MISSING_PARAMS());
@@ -132,6 +158,14 @@ exports.deleteCard = function(cardId, callback) {
   });
 };
 
+/**
+ * modify card stock (base_info.sku.quantity) (修改卡券库存)
+ * @param  {string}   cardId   [card id 卡券id]
+ * @param  {number}   number   [value to be modified 修改的数量]
+ *                             positive number -> increase (正数表示增加)
+ *                             negative number -> reduce (负数表示减少)
+ * @param  {Function} callback(error)
+ */
 exports.modifyCardStock = function(cardId, number, callback) {
   if(typeof cardId !== "string" || typeof number !== "number" 
     || typeof callback !== "function") {
@@ -153,6 +187,12 @@ exports.modifyCardStock = function(cardId, number, callback) {
 
 };
 
+/**
+ * create card qrcode  (创建卡券二维码，用于领取卡券)
+ * @param  {string}   cardId   [cardid 卡券id]
+ * @param  {object}   options  [qrcode options 二维码配置信息]
+ * @param  {Function} callback(error, qrcodeurl)
+ */
 exports.createCardQRCode = function(cardId, options, callback) {
 
   // set options optional

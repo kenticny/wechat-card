@@ -2,6 +2,11 @@ var config = require("../config");
 var request = require("../utils/request");
 var error = require("../utils/errors");
 
+/**
+ * consume a code (使用卡券)
+ * @param  {string}   code     [code of card 卡券兑换码]
+ * @param  {Function} callback(error, consumeinfo)
+ */
 exports.consumeCode = function(code, callback) {
   if(typeof code !== "string" || typeof callback !== "function") {
     return callback(error.MISSING_PARAMS());
@@ -16,6 +21,11 @@ exports.consumeCode = function(code, callback) {
   });
 };
 
+/**
+ * get code detail information (获取卡券兑换码的详细信息)
+ * @param  {string}   code     [code of card 卡券兑换码]
+ * @param  {Function} callback(error, codeinfo)
+ */
 exports.getCodeDetail = function(code, callback) {
   if(typeof code !== "string" || typeof callback !== "function") {
     return callback(error.MISSING_PARAMS());
@@ -30,6 +40,11 @@ exports.getCodeDetail = function(code, callback) {
   });
 };
 
+/**
+ * decrypt code (code解码)
+ * @param  {string}   encryptCode [encrypt code 加密的兑换码]
+ * @param  {Function} callback(error, code)
+ */
 exports.codeDecrypt = function(encryptCode, callback) {
   if(typeof encryptCode !== "string" || typeof callback !== "function") {
     return callback(error.MISSING_PARAMS());
@@ -42,6 +57,11 @@ exports.codeDecrypt = function(encryptCode, callback) {
   });
 };
 
+/**
+ * set a code expire (设置卡券兑换码过期)
+ * @param {string}   code     [code of card 卡券兑换码]
+ * @param {Function} callback(error)
+ */
 exports.setCodeExpire = function(code, callback) {
   if(typeof code !== "string" || typeof callback !== "function") {
     return callback(error.MISSING_PARAMS());
@@ -54,6 +74,13 @@ exports.setCodeExpire = function(code, callback) {
   });
 };
 
+/**
+ * modify luck money balance(just work when card type is LUCK_MONEY) 
+ * (修改红包余额，仅适用于卡券类型为红包)
+ * @param  {string}   code     [code of card 卡券兑换码]
+ * @param  {number}   balance  [the balance of luck money 红包余额]
+ * @param  {Function} callback(error)
+ */
 exports.modifyLuckMoneyBalance = function(code, balance, callback) {
   if(typeof code !== "string" || typeof balance !== "number" 
     || typeof callback !== "function") {

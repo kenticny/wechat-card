@@ -55,27 +55,38 @@ function getConfig() {
   return config;
 }
 
-function isNotExpire() {
-  if(Date.now - privateConfig.expireTime > 3600000) {
+function setPrivateConfig(key, value) {
+  if(typeof key === "string") {
+    privateConfig[key] = value;
+  }
+}
+
+/**
+ * check the token is expire or not (检查token是否过期)
+ * @param  {string}  type [access_token or jsapi_ticket]
+ * @return {Boolean}      [true or false]
+ */
+function isNotExpire(type) {
+  var op = privateConfig[type];
+  if(Date.now - op.expireTime > 3600000) {
     return false;
   }
   return true;
 }
 
 /**
- * get url with access token
- * @param  {String}   url      [api key]
- * @param  {Function} callback(error, url)
+ * get access token
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
  */
-function formatUrl(url, callback) {
+function getAccessToken(callback) {
 
   // parse response and return access token
-  var returnsFunc = function(b, cb) {
-    var token = (typeof b === "string") ? 
-          JSON.parse(b).access_token : b.access_token;
-    privateConfig.accessToken = token;
-    privateConfig.expireTime = Date.now;
-    cb(null, url + "?access_token=" + token);
+  var returnsFunc = function(body, callback) {
+    var token = (typeof body === "string") ? 
+          JSON.parse(body).access_token : body.access_token;
+    setPrivateConfig("access_token", {cred: token, expireTime: Date.now });
+    callback(null, token);
     return;
   };
 
@@ -83,8 +94,8 @@ function formatUrl(url, callback) {
   if(config._token) {
 
     // from wechat server
-    if(privateConfig.accessToken && isNotExpire()) {
-      return returnsFunc({access_token: privateConfig.accessToken}, callback);
+    if(privateConfig.access_token.cred && isNotExpire("access_token")) {
+      return returnsFunc({access_token: privateConfig.access_token.cred}, callback);
     }
     var accessTokenUrl = api.ACCESS_TOKEN + "&appid=" + config.appId + "&secret=" + config.appSecret;
     request.post(accessTokenUrl, function(err, res, body) {
@@ -105,9 +116,22 @@ function formatUrl(url, callback) {
   }
 }
 
+/**
+ * get url with access token (获得带有access token的url)
+ * @param  {String}   url      [api key]
+ * @param  {Function} callback(error, url)
+ */
+function formatUrl(url, callback) {
+  getAccessToken(function(err, token) {
+    if(err) {return callback(err); }
+    callback(null, url + "?access_token=" + token);
+  });
+}
+
 module.exports = {
   getConfig: getConfig,
   setConfig: setConfig,
+  setPrivateConfig: setPrivateConfig,
   getUrl: formatUrl,
   api: api
 };
