@@ -31,7 +31,7 @@ Get the current access token.
 
 - **example:**
 
-    ```
+    ```javascript
       wxCard.basic.getAccessToken(function(err, accessToken) {
         // do something ...
       });
@@ -53,7 +53,7 @@ Get api ticket, for Wechat Card JSAPI signature.
 
 - **example:**
 
-    ```
+    ```javascript
       wxCard.basic.getApiTicket(function(err, ticket) {
         // do something ...
       });
@@ -76,7 +76,7 @@ Get wechat card background colors, you have to use color name when create card.
 
 - **example:**
 
-    ```
+    ```javascript
       wxCard.basic.getColorList(function(err, colors) {
         // colors format: [{name: 'Color010', value: '#55bd47' }, ...]
       });
@@ -101,7 +101,7 @@ Set whitelist with wechat username. The wechat username in whitelist can get cod
 
 - **example:**
 
-    ```
+    ```javascript
       var usernames = ['kenticny'];
       wxCard.basic.setWhiteListWithUsername(usernames, function(err) {
         // do something ...
@@ -127,7 +127,7 @@ Set whitelist with wechat openID. see `setWhiteListWithUsername`
 
 - **example:**
 
-    ```
+    ```javascript
       // just a demo, don't exist in fact
       var openids = ['c8_tmrjPEct3_9seVe8eTPSOdL3N']; 
       

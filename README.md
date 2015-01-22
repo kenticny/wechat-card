@@ -11,20 +11,22 @@ Wechat Card API for NodeJS
 
 ## Usage
 
-    var wxCard = require("wechat-card");
+```javascript
+  var wxCard = require("wechat-card");
 
-    wxCard.setConfig({
-      appId: "YOUR APP ID",
-      appSecret: "YOUR APP SECRET"
+  wxCard.setConfig({
+    appId: "YOUR APP ID",
+    appSecret: "YOUR APP SECRET"
 
-      // or config access token service
-      // accessTokenService: "http://url"
+    // or config access token service
+    // accessTokenService: "http://url"
 
-    });
+  });
 
-    wxCard.card.createCard(cardinfo, function(error, cardid) {
-      // do something
-    });
+  wxCard.card.createCard(cardinfo, function(error, cardid) {
+    // do something
+  });
+```
 
 ## Document
 
