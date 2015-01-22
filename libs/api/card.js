@@ -197,7 +197,6 @@ exports.createCardQRCode = function(cardId, options, callback) {
 
   // set options optional
   if(typeof options === "function" && !callback) {
-
     callback = options; options = {};
   }
   if(typeof cardId !== "string" || typeof options !== "object" 
