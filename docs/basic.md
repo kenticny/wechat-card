@@ -128,7 +128,7 @@ Set whitelist with wechat openID. see `setWhiteListWithUsername`
 - **example:**
 
     ```javascript
-      // just a demo, don't exist in fact
+      // just a demo, doesn't exist in fact
       var openids = ['c8_tmrjPEct3_9seVe8eTPSOdL3N']; 
       
       wxCard.basic.setWhiteListWithOpenId(openids, function(err) {
