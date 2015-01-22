@@ -13,6 +13,8 @@ Wechat Basic Document
 
 - [setWhiteListWithOpenId(openids, callback)](#setwhitelistwithopenidopenids-callback)
 
+======
+
 ### Document
 
 ##### getAccessToken(callback)
@@ -35,7 +37,7 @@ Get the current access token.
       });
     ```
 
-
+======
 
 ##### getApiTicket(callback)
 
@@ -57,6 +59,9 @@ Get api ticket, for Wechat Card JSAPI signature.
       });
     ```
 
+======
+
+
 ##### getColorList(callback)
 
 Get wechat card background colors, you have to use color name when create card.
@@ -76,6 +81,9 @@ Get wechat card background colors, you have to use color name when create card.
         // colors format: [{name: 'Color010', value: '#55bd47' }, ...]
       });
     ```
+
+======
+
 
 ##### setWhiteListWithUsername(usernames, callback)
 
@@ -99,6 +107,8 @@ Set whitelist with wechat username. The wechat username in whitelist can get cod
         // do something ...
       });
     ```
+
+======
 
 
 ##### setWhiteListWithOpenId(openids, callback)
