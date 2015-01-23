@@ -32,7 +32,7 @@ Wechat Card API for NodeJS
 
 ## Document
 
-[Wechat Card API Document](docs/index.md)
+[Wechat Card API Document](docs/en-US/index.md)
 
 ## License
 
