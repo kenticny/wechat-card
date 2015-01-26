@@ -1,32 +1,32 @@
 Wechat Shop Document
 ======================
 
-### Guide
+### 向导
 
 - [batchAddShops(shops, callback)](#batchaddshopsshops-callback)
 
 - [batchGetShops(offset, count, callback)](#batchgetshopsoffset-count-callback)
 
-### Document
+### 文档
 
 ##### batchAddShops(shops, callback)
 
-Register shop to wechat [MP](https://mp.weixin.qq.com/) (BATCH).
+批量注册门店到 [MP](https://mp.weixin.qq.com/) .
 
-- **parameters:**
+- **参数:**
 
-    - ***shops***: `Array` the array of shop information. See [Shop Fields](createshop.md)
+    - ***shops***: `Array` 门店信息数组
 
     - ***callback***(error, shopids): `Function`
 
-        - ***error***: `Object` contains error code and error message
+        - ***error***: `Object` 包含错误代码和错误信息，详情查看[门店信息字段](createshop.md)
 
-        - ***shopids***: `Array` the list of shop ids, if failed to add, shop id is -1
+        - ***shopids***: `Array` 门店ID， 如果门店添加失败，则id为-1
 
-- **example:**
+- **示例:**
   
     ```javascript 
-      // the demo data from wechat card official document
+      // demo数据来自于微信卡券官方文档
       var shops = [{
         "business_name":"麦当劳", 
         "branch_name":"赤岗店",
@@ -58,25 +58,25 @@ Register shop to wechat [MP](https://mp.weixin.qq.com/) (BATCH).
 
 ##### batchGetShops(offset, count, callback)
 
-Get list of shops information. (BATCH)
+批量获取门店信息
 
-- **parameters:**
+- **参数:**
 
     - ***offset***: `Number`
 
-      the coordinates of the first element. the list start at offset.
+      列表第一个元素的位置
 
     - ***count***: `Number`
 
-      the size of list.
+      列表的大小
 
     - ***callback***(error, shops): `Function`
 
-        ***error***: `Object` contains error code and error message.
+        ***error***: `Object` 包含错误代码和错误信息
 
-        ***shops***: `Array` the shop list.
+        ***shops***: `Array` 门店列表
 
-- **example:**
+- **示例:**
 
     ```javascript
       wxCard.shop.batchGetShops(0, 10, function(err, shops) {

@@ -1,7 +1,7 @@
 Wechat Card Document
 ======================
 
-### Guide
+### 向导
 
 - [createCard(card, callback)](#createcardcard-callback)
 
@@ -18,25 +18,25 @@ Wechat Card Document
 - [createCardQRCode(cardId, options, callback)](#createcardqrcodecardid-options-callback)
 
 
-### Document
+### 文档
 
 ##### createCard(card, callback)
 
-Create a new card. You need to wait until the audit is completed. During this period, you can set whitelist to test the card.
+创建一个新的卡券，卡券需要通过审核后才可以领取（可通过添加白名单进行测试）
 
-- **parameters:**
+- **参数:**
 
     - ***card***: `Object` 
 
-      the card information. contains card type, base info, special info. See [Card Fields](createcard.md)
+      卡券信息，包括卡券类型，基本信息和特殊信息。详细请查看 [卡券配置](createcard.md)
 
     - ***callback***(error, cardId): `Function`
 
-        ***error***: `Object` contains error code and error message
+        ***error***: `Object` 包含错误码和错误信息
 
-        ***cardId***: `String` the id of card.
+        ***cardId***: `String` 卡券id.
 
-- **example:**
+- **示例:**
 
     ```javascript
       var card = {
@@ -59,25 +59,25 @@ Create a new card. You need to wait until the audit is completed. During this pe
 
 ##### getCardDetail(cardId, callback)
 
-Get card details by card id.
+通过卡券id获取卡券详细信息
 
-- **parameters:**
+- **参数:**
 
     - ***cardId***: `String`
 
-      the id of card.
+      卡券id.
 
     - ***callback***(error, card): `Function`
 
-        ***error***: `Object` contains error code and error message
+        ***error***: `Object` 包含错误码和错误信息
 
-        ***card***: `Object` the card details.
+        ***card***: `Object` 卡券详情.
 
-- **example:**
+- **示例:**
 
     ```javascript
 
-      // this card id just a demo, does not exist in fact
+      // 下列卡券id仅用于demo，在实际中不存在
       var cardId = "p1Pj9jr90_SQRaVqYI239Ka1erkI";
 
       wxCard.card.getCardDetail(cardId, function(err, card) {
@@ -90,26 +90,26 @@ Get card details by card id.
 
 ##### getCardIdList(offset, count, callback)
 
-Get the list of card id. Don't contains card details, just id.
+批量获取卡券id，不包含卡券详细信息
 
-- **parameters:**
+- **参数:**
 
     - ***offset***: `Number`
 
-      the coordinates of the first element. the list start at offset.
+      列表中第一个元素的位置
 
     - ***count***: `Number`
 
-      the size of list.
+      获取的数量
 
     - ***callback***(error, ids): `Function`
 
-        ***error***: `Object` contains error code and error message.
+        ***error***: `Object` 包括错误码和错误信息
 
-        ***ids***: `Array` the id list.
+        ***ids***: `Array` 卡券id列表
 
 
-- **example:**
+- **示例:**
 
     ```javascript
       wxCard.card.getCardIdList(0, 10, function(err, ids) {
@@ -122,23 +122,23 @@ Get the list of card id. Don't contains card details, just id.
 
 ##### modifyCard(card, callback)
 
-Modify the part card base info.
+修改卡券部分信息
 
-- **parameters:**
+- **参数:**
 
     - ***card***: `Object`
 
-      the new card information. See [Modify Card Fields](modifycard.md)
+      修改的卡券信息, 详情查看[修改卡券字段](modifycard.md)
 
     - ***callback***(error): `Function`
 
-        ***error***: `Object` contains error code and error message.
+        ***error***: `Object` 包含错误码和错误信息
 
-- **example:**
+- **示例:**
 
     ```javascript
 
-      // this card id does not exist in fact
+      // 下面的cardid仅用于demo，实际中不存在
       var card = {
         card_id: "p1Pj9jr90_SQRaVqYI239Ka1erkI",
         base_info: {
@@ -159,22 +159,22 @@ Modify the part card base info.
 
 ##### deleteCard(cardId, callback)
 
-Delete a card by card id. 
+通过卡券ID删除卡券信息
 
-- **parameters:**
+- **参数:**
 
     - ***cardId***: `String`
 
-      the id of card.
+      卡券ID
 
     - ***callback***(error): `Function`
 
-        ***error***: `Object` contains error code and error message.
+        ***error***: `Object` 包含错误码和错误信息
 
-- **example:**
+- **示例:**
 
     ```javascript
-      // this card id just a demo, does not exist in fact
+      // 下面的cardid仅用于demo，实际中不存在
       var cardId = "p1Pj9jr90_SQRaVqYI239Ka1erkI";
 
       wxCard.card.deleteCard(cardId, function(err) {
@@ -187,35 +187,35 @@ Delete a card by card id.
 
 ##### modifyCardStock(cardId, number, callback)
 
-Modify card stock(base_info.sku.quantity). 
+修改卡券库存(base_info.sku.quantity). 
 
-- **parameters:**
+- **参数:**
 
     - ***cardId***: `String`
 
-      the id of card.
+      卡券ID
 
     - ***number***: `Number`
 
-      the stock value to be modified. the positive number indicates increase, and the negative number indicates reduce
+      要修改的库存值，正数表示增加，负数表示减少
 
     - ***callback***(error): `Function`
 
-        ***error***: `Object` contains error code and error message
+        ***error***: `Object` 包含错误码和错误信息
 
 
-- **example:**
+- **示例:**
 
     ```javascript
-      // this card id just a demo, does not exist in fact
+      // 下面的cardid仅用于demo，实际中不存在
       var cardId = "p1Pj9jr90_SQRaVqYI239Ka1erkI";
 
-      // reduce
+      // 减少10库存
       wxCard.card.modifyCardStock(cardId, -10, function(err) {
         // do something ...
       });
 
-      // increase
+      // 增加10库存
       wxCard.card.modifyCardStock(cardId, 10, function(err) {
         // do something ...
       });
@@ -226,38 +226,38 @@ Modify card stock(base_info.sku.quantity).
 
 ##### createCardQRCode(cardId, options, callback)
 
-Create a QR code to collcet code of card.
+生成一个用于领取卡券的二维码
 
-- **parameters:**
+- **参数:**
 
     - ***cardId***: `String`
 
-      the id of card
+      卡券ID
 
     - ***options***: `Object(Optional)`
 
-      the options of qrcode. 
+      二维码的配置 
 
       options: 
 
-      - expire_seconds: `Number` the expiration time(second).
+      - expire_seconds: `Number` 二维码过期时间（单位/秒）.
 
-      - is_unique_code: `Boolean` disposable qrcode.
+      - is_unique_code: `Boolean` 是否为一次性
 
-      - outer_id: `Number` the custom flag.
+      - outer_id: `Number` 自定义标志，用于区分领取场景
 
-      - balance: `Number` the balance of LUCK_MONEY card. just work in `LUCK_MONEY`.
+      - balance: `Number` 红包余额，仅在卡券类型为`红包(LUCK_MONEY)`是生效
 
     - ***callback***(error, url): `Function`
 
-        ***error***: `Object` contains error code and error message
+        ***error***: `Object` 包括错误码和错误信息
 
-        ***url***: `String` the url of qrcode
+        ***url***: `String` 二维码的链接
 
-- **example:**
+- **示例:**
 
     ```javascript
-      // this card id just a demo, does not exist in fact
+      // 下面的cardid仅用于demo，实际中不存在
       var cardId = "p1Pj9jr90_SQRaVqYI239Ka1erkI";
 
       var options = {

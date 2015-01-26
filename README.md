@@ -1,17 +1,22 @@
 wechat-card
 ========================
 
-Wechat Card API for NodeJS 
+#### [English ReadMe](README-EN.md)
 
-> **Do not support custom card and code, this part will be update in next version**
+微信卡券API接口NODEJS版
 
-> **Just support card type: CASH, DISCOUNT, GIFT, GROUPON, GENERAL_COUPON, LUCK_MONEY in this verison**
+> 目前版本仅支持以下几种类型的卡券: `CASH`, `GIFT`, `GROUPON`, `DISCOUNT`, `GENERAL_COUPON`, `LUCK_MONEY`。
 
-## Install
+> 目前版本不支持自定义卡券ID和自定义code
+
+我们会在之后的版本陆续推出这些功能的支持。
+
+
+## 安装
 
     npm install wechat-card
 
-## Usage
+## 使用方法
 
 ```javascript
   var wxCard = require("wechat-card");
@@ -20,7 +25,7 @@ Wechat Card API for NodeJS
     appId: "YOUR APP ID",
     appSecret: "YOUR APP SECRET"
 
-    // or config access token service
+    // 可以配置提供access token的服务
     // accessTokenService: "http://url"
 
   });
@@ -30,9 +35,9 @@ Wechat Card API for NodeJS
   });
 ```
 
-## Document
+## 文档
 
-[Wechat Card API Document](docs/en-US/index.md)
+[Wechat Card API Document](docs/zh-CN/index.md)
 
 ## License
 
