@@ -37,7 +37,7 @@ wechat-card
 
 ## 文档
 
-[Wechat Card API Document](docs/zh-CN/index.md)
+[卡券详细文档](docs/zh-CN/index.md)
 
 ## License
 
