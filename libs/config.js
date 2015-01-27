@@ -71,9 +71,9 @@ function setPrivateConfig(key, value) {
  * @param  {string}  type [access_token or jsapi_ticket]
  * @return {Boolean}      [true or false]
  */
-function isNotExpire(type) {
+function isNotExpire(type, expireTime) {
   var op = privateConfig[type];
-  if(Date.now() - op.expireTime > 3600000) {
+  if(Date.now() - op.expireTime > (expireTime || 3600000)) {
     return false;
   }
   return true;
@@ -141,7 +141,7 @@ function getApiTicket(callback) {
   };
 
   // get ticket if not expire
-  if(privateConfig.jsapi_ticket.cred && isNotExpire("jsapi_ticket")) {
+  if(privateConfig.jsapi_ticket.cred && isNotExpire("jsapi_ticket", 7200000)) {
     return returnsFunc({ticket: privateConfig.jsapi_ticket.cred }, false, callback);
   }
 
