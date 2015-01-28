@@ -17,6 +17,9 @@ var errors = {
   LUCK_MONEY_BALANCE_ERROR: function() {
     return {code: 9006, msg: "luck money balance error"};
   },
+  SIGN_DATA_CANNOT_NULL: function() {
+    return {code: 9007, msg: "signature array cannot empty"};
+  },
   INTERFACE_ERROR: function(err) {
     return {code: err.errcode, msg: "wechat interface error: " + err.errmsg};
   }

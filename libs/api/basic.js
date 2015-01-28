@@ -1,5 +1,6 @@
 var config = require("../config");
 var request = require("../utils/request");
+var encrypt = require("../utils/encrypt");
 var error = require("../utils/errors");
 
 /**
@@ -68,4 +69,36 @@ exports.setWhiteListWithOpenId = function(openids, callback) {
     if(err) {return callback(err); }
     callback(null);
   });
+};
+
+/**
+ * calculate signature (计算签名)
+ * @param  {Array}   data     [The data to be encrypted 待加密数据]
+ * @param  {Function} callback(error, signature)
+ */
+exports.getSignature = function(data, callback) {
+  if(!data instanceof Array || typeof callback !== "function") {
+    return callback(error.MISSING_PARAMS());
+  }
+  var signatureStr = data.sort().join("");
+  if(signatureStr === "") {
+    return callback(error.SIGN_DATA_CANNOT_NULL());
+  }
+  callback(null, encrypt.sha1(signatureStr));
+};
+
+/**
+ * calculate signature sync (计算签名 同步)
+ * @param  {Array} data [The data to be encrypted 待加密数据]
+ * @return {String}      [signature 签名]
+ */
+exports.getSignatureSync = function(data) {
+  if(!data instanceof Array) {
+    return error.MISSING_PARAMS();
+  }
+  var signatureStr = data.sort().join("");
+  if(signatureStr === "") {
+    return error.SIGN_DATA_CANNOT_NULL();
+  }
+  return encrypt.sha1(signatureStr);
 };
