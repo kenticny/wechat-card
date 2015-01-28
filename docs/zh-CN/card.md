@@ -28,7 +28,7 @@ Wechat Card Document
 
     - ***card***: `Object` 
 
-      卡券信息，包括卡券类型，基本信息和特殊信息。详细请查看 [卡券配置](createcard.md)
+      卡券信息，包括卡券类型，基本信息和特殊信息。详细请查看 [卡券信息字段](createcard.md)
 
     - ***callback***(error, cardId): `Function`
 
