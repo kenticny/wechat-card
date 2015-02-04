@@ -13,6 +13,11 @@ Wechat Basic Document
 
 - [setWhiteListWithOpenId(openids, callback)](#setwhitelistwithopenidopenids-callback)
 
+- [getSignature(data, callback)](#getsignaturedata-callback)
+
+- [getSignatureSync(data)](#getsignaturesyncdata)
+
+
 ======
 
 ### 文档
@@ -134,4 +139,57 @@ Wechat Basic Document
       wxCard.basic.setWhiteListWithOpenId(openids, function(err) {
         // do something ...
       });
+    ```
+
+
+======
+
+
+##### getSignature(data, callback)
+
+计算签名，用于JSAPI. 
+
+- **参数:**
+
+    - ***data***: `Array`
+
+        要签名的数据.
+
+    - ***callback***(error, signature): `Function`
+
+        ***error***: `Object` 包含错误码和错误信息
+
+        ***signature***: `String` 签名
+
+- **示例:**
+
+  ```javascript
+    var data = ['ApiTicket', 'CardId', 'timestamp'];
+    wxCard.basic.getSignature(data, function(err, signature) {
+      // do something ...
+    });
+  ```
+
+
+======
+
+##### getSignatureSync(data)
+
+计算签名 （同步方法）.
+
+- **参数:**
+
+    - ***data***: `Array`
+
+        要签名的数据.
+
+- **返回:**
+
+    - ***signature***: `String` 签名
+
+- **示例:**
+
+    ```javascript
+      var data = ['ApiTicket', 'CardId', 'timestamp'];
+      var signature = wxCard.basic.getSignatureSync(data);
     ```

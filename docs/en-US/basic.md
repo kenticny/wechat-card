@@ -13,6 +13,10 @@ Wechat Basic Document
 
 - [setWhiteListWithOpenId(openids, callback)](#setwhitelistwithopenidopenids-callback)
 
+- [getSignature(data, callback)](#getsignaturedata-callback)
+
+- [getSignatureSync(data)](#getsignaturesyncdata)
+
 ======
 
 ### Document
@@ -123,7 +127,7 @@ Set whitelist with wechat openID. see `setWhiteListWithUsername`
 
     - ***callback***(error): `Function`
 
-        ***error***: contains error code and error message
+        ***error***: `Object` contains error code and error message
 
 - **example:**
 
@@ -134,4 +138,56 @@ Set whitelist with wechat openID. see `setWhiteListWithUsername`
       wxCard.basic.setWhiteListWithOpenId(openids, function(err) {
         // do something ...
       });
+    ```
+
+======
+
+
+##### getSignature(data, callback)
+
+Get Signature. 
+
+- **parameters:**
+
+    - ***data***: `Array`
+
+        the array of data to be encrypted.
+
+    - ***callback***(error, signature): `Function`
+
+        ***error***: `Object` contains error code and error message
+
+        ***signature***: `String` the signature
+
+- **example:**
+
+  ```javascript
+    var data = ['ApiTicket', 'CardId', 'timestamp'];
+    wxCard.basic.getSignature(data, function(err, signature) {
+      // do something ...
+    });
+  ```
+
+
+======
+
+##### getSignatureSync(data)
+
+Get Signature Synchronous.
+
+- **paramters:**
+
+    - ***data***: `Array`
+
+        the array of data to be encrypted.
+
+- **return:**
+
+    - ***signature***: `String` 
+
+- **example:**
+
+    ```javascript
+      var data = ['ApiTicket', 'CardId', 'timestamp'];
+      var signature = wxCard.basic.getSignatureSync(data);
     ```
