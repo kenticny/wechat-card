@@ -173,7 +173,7 @@ function formatUrl(url, callback) {
 module.exports = {
   getConfig: getConfig,
   setConfig: setConfig,
-  getApiTicket: getApiTicket,
+  getTicket: getTicket,
   getAccessToken: getAccessToken,
   getUrl: formatUrl,
   api: api
