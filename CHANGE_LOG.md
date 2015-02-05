@@ -1,13 +1,17 @@
 微信卡券Nodejs版API更新日志
 ========================
 
+### V1.0.5
+
+- 增加获取JSAPI Ticket方法
+
 ### V1.0.4
 
 - 增加JSAPI计算签名方法
 
 ### V1.0.3
 
-- 修正了获取JS API TICKET获取不正常的bug
+- 修正了获取Wechat Card TICKET获取不正常的bug
 
 ### V1.0.2
 
