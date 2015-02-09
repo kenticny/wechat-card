@@ -51,7 +51,7 @@ Wechat Create Card Field
 
     - **use_custom_code**: (Optional) custom code. true or false.
 
-    - **bind_openid**: (Optional) specifies the user to get card. **(Do not support in this version)**
+    - **bind_openid**: (Optional) specifies the user to get card. 
 
     - **can_share**: (Optional) get card page can be shared or not by wecaht. true or false.
 
