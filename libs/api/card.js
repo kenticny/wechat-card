@@ -230,6 +230,11 @@ exports.createCardQRCode = function(cardId, options, callback) {
     qrcodeOptions.action_info.card.balance = options.balance;
   }
 
+  // custom code
+  if(options.code) {
+    qrcodeOptions.action_info.card.code = options.code;
+  }
+
   // generate card qrcode ticket 
   // and get qrcode url by ticket
   request.post(config.api.CREATE_CARD_QR_CODE_TICKET, {
