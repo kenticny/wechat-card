@@ -248,6 +248,8 @@ Wechat Card Document
 
       - balance: `Number` 红包余额，仅在卡券类型为`红包(LUCK_MONEY)`是生效
 
+      - code: `String` 卡券code, 自定义卡券code时为**必填**
+
     - ***callback***(error, url): `Function`
 
         ***error***: `Object` 包括错误码和错误信息

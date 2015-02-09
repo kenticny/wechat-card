@@ -16,7 +16,7 @@ Wechat Code Document
 
 ### Document
 
-##### consumeCode(code, callback)
+##### consumeCode(code, [cardId ], callback)
 
 Consume a code of card.
 
@@ -25,6 +25,10 @@ Consume a code of card.
     - ***code***: `String`
 
       the code of card
+
+    - ***cardId***: `String(Optional)`
+
+      card id. (Custom code required)
 
     - ***callback***(error, consumeInfo): `Function`
 

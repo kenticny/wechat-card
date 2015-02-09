@@ -8,8 +8,6 @@ Wechat card api for NodeJS.
 
 > Just support `CASH`, `GIFT`, `GROUPON`, `DISCOUNT`, `GENERAL_COUPON`, `LUCK_MONEY`
 
-> Do **Not** support custom card id and code
-
 We will provide a full support in next version.
 
 

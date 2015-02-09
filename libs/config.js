@@ -124,31 +124,32 @@ function getAccessToken(callback) {
 }
 
 /**
- * get jsapi ticket
+ * get ticket
+ * @param {String} type [ticket type]
  * @param  {Function} callback(error, ticket)
  */
-function getApiTicket(callback) {
+function getTicket(type, callback) {
 
   // parse the response object and return ticket
   var returnsFunc = function(body, isNew, callback) {
     var token = (typeof body === "string") ? 
           JSON.parse(body).ticket : body.ticket;
     if(isNew) {
-      setPrivateConfig("jsapi_ticket", {cred: token, expireTime: Date.now() });
+      setPrivateConfig(type + "_ticket", {cred: token, expireTime: Date.now() });
     }
     callback(null, token);
     return;
   };
 
   // get ticket if not expire
-  if(privateConfig.jsapi_ticket.cred && isNotExpire("jsapi_ticket", 7200000)) {
+  if(privateConfig.jsapi_ticket.cred && isNotExpire(type + "_ticket", 7200000)) {
     return returnsFunc({ticket: privateConfig.jsapi_ticket.cred }, false, callback);
   }
 
   // request jsapi ticket if it expired
   formatUrl(api.API_TICKET, function(err, url) {
     if(err) {return callback(err); }
-    request.get(url + "&type=wx_card", function(err, res, body) {
+    request.get(url + "&type=" + type, function(err, res, body) {
       if(err) {
         return callback(error.REQUEST_ERROR(err));
       }
@@ -172,7 +173,7 @@ function formatUrl(url, callback) {
 module.exports = {
   getConfig: getConfig,
   setConfig: setConfig,
-  getApiTicket: getApiTicket,
+  getTicket: getTicket,
   getAccessToken: getAccessToken,
   getUrl: formatUrl,
   api: api

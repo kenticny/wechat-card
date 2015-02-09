@@ -18,7 +18,16 @@ exports.getAccessToken = function(callback) {
  */
 exports.getApiTicket = function(callback) {
   callback = callback || function() {};
-  config.getApiTicket(callback);
+  config.getTicket("wx_card", callback);
+};
+
+/**
+ * get current jsapi ticket
+ * @param  {Function} callback(error, ticket)
+ */
+exports.getJsApiTicket = function(callback) {
+  callback = callback || function() {};
+  config.getTicket("jsapi", callback);
 };
 
 /**

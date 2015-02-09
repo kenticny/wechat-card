@@ -49,9 +49,9 @@
 
     - **location_id_list**: (可选) 门店ID，显示在卡券适用门店中.
 
-    - **use_custom_code**: (可选) 自定义code. true 或者 false. **(当前版本不支持)**
+    - **use_custom_code**: (可选) 自定义code. true 或者 false.
 
-    - **bind_openid**: (可选) 指定领取用户. **(当前版本不支持)**
+    - **bind_openid**: (可选) 指定领取用户.
 
     - **can_share**: (可选) 卡券领取页面是否可以分享。true 或者 false
 

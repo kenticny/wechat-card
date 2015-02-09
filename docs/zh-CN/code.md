@@ -16,7 +16,7 @@ Wechat Code Document
 
 ### 文档
 
-##### consumeCode(code, callback)
+##### consumeCode(code, [cardId ], callback)
 
 使用卡券code
 
@@ -25,6 +25,10 @@ Wechat Code Document
     - ***code***: `String`
 
       卡券code
+
+    - ***cardId***: `String(可选)`
+
+      卡券ID, code为自定义code时为必填
 
     - ***callback***(error, consumeInfo): `Function`
 

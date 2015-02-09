@@ -8,8 +8,6 @@ Wechat Card
 
 > 目前版本仅支持以下几种类型的卡券: `CASH`, `GIFT`, `GROUPON`, `DISCOUNT`, `GENERAL_COUPON`, `LUCK_MONEY`。
 
-> 目前版本不支持自定义卡券ID和自定义code
-
 我们会在之后的版本陆续推出这些功能的支持。
 
 

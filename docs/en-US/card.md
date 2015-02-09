@@ -248,6 +248,8 @@ Create a QR code to collcet code of card.
 
       - balance: `Number` the balance of LUCK_MONEY card. just work in `LUCK_MONEY`.
 
+      - code: `String` the code of card. custom code required.
+
     - ***callback***(error, url): `Function`
 
         ***error***: `Object` contains error code and error message

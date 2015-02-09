@@ -7,12 +7,22 @@ var error = require("../utils/errors");
  * @param  {string}   code     [code of card 卡券兑换码]
  * @param  {Function} callback(error, consumeinfo)
  */
-exports.consumeCode = function(code, callback) {
-  if(typeof code !== "string" || typeof callback !== "function") {
+exports.consumeCode = function(code, cardId, callback) {
+  if(typeof cardId === "function" && !callback) {
+    callback = cardId; cardId = "";
+  }
+  if(typeof code !== "string" || typeof cardId !== "string" 
+    || typeof callback !== "function") {
     return callback(error.MISSING_PARAMS());
   }
+  var codeObj = {code: code};
+
+  // custom code have to fill card id
+  if(cardId) {
+    codeObj["card_id"] = cardId;
+  }
   request.post(config.api.CONSUME_CODE, {
-    form: JSON.stringify({code: code })
+    form: JSON.stringify(codeObj)
   }, function(err, result) {
     if(err) {return callback(err); }
     var consumeInfo = result.card;

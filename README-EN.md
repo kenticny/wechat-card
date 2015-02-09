@@ -3,8 +3,6 @@ wechat-card
 
 Wechat Card API for NodeJS 
 
-> **Do not support custom card and code, this part will be update in next version**
-
 > **Just support card type: CASH, DISCOUNT, GIFT, GROUPON, GENERAL_COUPON, LUCK_MONEY in this verison**
 
 ## Install
