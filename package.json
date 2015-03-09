@@ -1,6 +1,6 @@
 {
   "name": "wechat-card",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "微信卡券接口. Wechat( Weixin ) Card, include coupon , discount, cash, gift, etc..",
   "main": "index.js",
   "scripts": {
