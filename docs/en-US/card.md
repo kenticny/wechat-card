@@ -250,6 +250,8 @@ Create a QR code to collcet code of card.
 
       - code: `String` the code of card. custom code required.
 
+      - openid: `String` the specified user openid. bind openid required.
+
     - ***callback***(error, url): `Function`
 
         ***error***: `Object` contains error code and error message

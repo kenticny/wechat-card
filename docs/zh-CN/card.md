@@ -250,6 +250,8 @@ Wechat Card Document
 
       - code: `String` 卡券code, 自定义卡券code时为**必填**
 
+      - openid: `String` 指定领取用户openid, bind_openid为true时**必填**
+
     - ***callback***(error, url): `Function`
 
         ***error***: `Object` 包括错误码和错误信息
