@@ -51,6 +51,30 @@ exports.getCodeDetail = function(code, callback) {
 };
 
 /**
+ * modify code （修改code）
+ * @param  {string}   code     [code ]
+ * @param  {string}   cardid   [card id]
+ * @param  {string}   newcode  [new code]
+ * @param  {Function} callback(error)
+ */
+exports.modifyCode = function(code, cardid, newcode, callback) {
+  if(typeof code !== "string" || typeof cardid !== "string"
+    || typeof newcode !== "string" || typeof callback !== "function") {
+    return callback(error.MISSING_PARAMS());
+  }
+  request.post(config.api.MODIFY_CODE, {
+    form: JSON.stringify({
+      code: code, 
+      card_id: cardid,
+      new_code: newcode
+    })
+  }, function(err, result) {
+    if(err) {return callback(err); }
+    callback(null);
+  });
+};
+
+/**
  * decrypt code (code解码)
  * @param  {string}   encryptCode [encrypt code 加密的兑换码]
  * @param  {Function} callback(error, code)

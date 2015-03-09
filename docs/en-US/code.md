@@ -7,6 +7,8 @@ Wechat Code Document
 
 - [getCodeDetail(code, callback)](#getcodedetailcode-callback)
 
+- [modifyCode(code, cardid, newcode, callback)](#modifycodecode-cardid-newcode-callback)
+
 - [codeDecrypt(encryptCode, callback)](#codedecryptencryptcode-callback)
 
 - [setCodeExpire(code, callback)](#setcodeexpirecode-callback)
@@ -78,6 +80,47 @@ Get code details.
       });
 
     ```
+
+======
+
+##### modifyCode(code, cardid, newcode, callback)
+
+modify the code
+
+Scene：you should modify the code when the code give to friend.
+
+- **parameters:**
+
+    - ***code***: `String`
+
+      original code
+
+    - ***cardid***: `String`
+
+      the card id of code
+
+    - ***newcode***: `String`
+
+      new code
+
+    - ***callback***(error): `Function`
+
+        ***error***: `Object` contains error code and error message
+
+- **example:**
+
+    ```javascript
+
+      var code = "882077290937";
+      var cardId = "p1Pj9jr90_SQRaVqYI239Ka1erkI";
+      var newcode = "883920048827";
+
+      wxCard.code.modifyCode(code, cardId, newcode, function(err) {
+        // do something ...
+      });
+    ```
+
+======
 
 ##### codeDecrypt(encryptCode, callback)
 

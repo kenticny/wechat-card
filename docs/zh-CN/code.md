@@ -7,6 +7,8 @@ Wechat Code Document
 
 - [getCodeDetail(code, callback)](#getcodedetailcode-callback)
 
+- [modifyCode(code, cardid, newcode, callback)](#modifycodecode-cardid-newcode-callback)
+
 - [codeDecrypt(encryptCode, callback)](#codedecryptencryptcode-callback)
 
 - [setCodeExpire(code, callback)](#setcodeexpirecode-callback)
@@ -78,6 +80,48 @@ Wechat Code Document
       });
 
     ```
+
+======
+
+##### modifyCode(code, cardid, newcode, callback)
+
+修改Code
+
+使用场景：在自定义SN时，当卡券转增后建议修改Code.
+
+- **参数:**
+
+    - ***code***: `String`
+
+      原始Code
+
+    - ***cardid***: `String`
+
+      code所属的卡券ID
+
+    - ***newcode***: `String`
+
+      新的Code
+
+    - ***callback***(error): `Function`
+
+        ***error***: `Object` 包含错误代码和错误信息
+
+- **实例:**
+
+    ```javascript
+
+      // 下面的卡券id和code仅用于demo，实际中不存在
+      var code = "882077290937";
+      var cardId = "p1Pj9jr90_SQRaVqYI239Ka1erkI";
+      var newcode = "883920048827";
+
+      wxCard.code.modifyCode(code, cardId, newcode, function(err) {
+        // do something ...
+      });
+    ```
+
+======
 
 ##### codeDecrypt(encryptCode, callback)
 

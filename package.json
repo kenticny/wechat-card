@@ -4,7 +4,7 @@
   "description": "微信卡券接口. Wechat( Weixin ) Card, include coupon , discount, cash, gift, etc..",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha --timeout 5000 test/test.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,8 @@
   ],
   "dependencies": {
     "request": "^2.51.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.1"
   }
 }

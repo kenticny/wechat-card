@@ -3,5 +3,6 @@ module.exports = {
   shop: require("./api/shop"),
   card: require("./api/card"),
   code: require("./api/code"),
-  setConfig: require("./config").setConfig
+  setConfig: require("./config").setConfig,
+  config: require("./config").setConfig
 };
