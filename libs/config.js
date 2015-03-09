@@ -34,6 +34,7 @@ var api = {
   // CODE
   CONSUME_CODE: "https://api.weixin.qq.com/card/code/consume",
   GET_CODE_DETAIL: "https://api.weixin.qq.com/card/code/get",
+  MODIFY_CODE: "https://api.weixin.qq.com/card/code/update",
   CODE_DECRYPT: "https://api.weixin.qq.com/card/code/decrypt",
   SET_CODE_EXPIRE: "https://api.weixin.qq.com/card/code/unavailable",
   MODIFY_LUCK_MONEY_BALANCE: "https://api.weixin.qq.com/card/luckymoney/updateuserbalance",
@@ -88,8 +89,7 @@ function getAccessToken(callback) {
 
   // parse response and return access token
   var returnsFunc = function(body, isNew, callback) {
-    var token = (typeof body === "string") ? 
-          JSON.parse(body).access_token : body.access_token;
+    var token = body.access_token;
     if(isNew) {
       setPrivateConfig("access_token", {cred: token, expireTime: Date.now() });
     }
@@ -117,6 +117,14 @@ function getAccessToken(callback) {
     request.get(config.accessTokenService, function(err, res, body) {
       if(err) {
         return callback(error.REQUEST_ERROR(err));
+      }
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        body = null;
+      }
+      if(!body || !body.access_token) {
+        return callback(error.TOKEN_SERVICE_FORMAT_ERROR());
       }
       returnsFunc(body, false, callback);
     });

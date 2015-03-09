@@ -20,6 +20,9 @@ var errors = {
   SIGN_DATA_CANNOT_NULL: function() {
     return {code: 9007, msg: "signature array cannot empty"};
   },
+  TOKEN_SERVICE_FORMAT_ERROR: function(err) {
+    return {code: 9008, msg: "access token service format error, must be {access_token: \"\"}"}
+  },
   INTERFACE_ERROR: function(err) {
     return {code: err.errcode, msg: "wechat interface error: " + err.errmsg};
   }
