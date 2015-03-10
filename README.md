@@ -1,6 +1,8 @@
 wechat-card
 ========================
 
+[![Build Status](https://travis-ci.org/kenticny/wechat-card.svg?branch=master)](https://travis-ci.org/kenticny/wechat-card)
+
 #### [English ReadMe](README-EN.md)
 
 微信卡券API接口NODEJS版

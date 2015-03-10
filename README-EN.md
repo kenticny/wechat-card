@@ -1,6 +1,8 @@
 wechat-card
 ========================
 
+[![Build Status](https://travis-ci.org/kenticny/wechat-card.svg?branch=master)](https://travis-ci.org/kenticny/wechat-card)
+
 Wechat Card API for NodeJS 
 
 > **Just support card type: CASH, DISCOUNT, GIFT, GROUPON, GENERAL_COUPON, LUCK_MONEY in this verison**
