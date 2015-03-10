@@ -7,7 +7,7 @@ exports.post = function(api, options, callback) {
 
     // get access token error
     if(err) {
-      return callback(error.ACCESS_TOKEN_ERROR());
+      return callback(err);
     }
     request.post(url, options, function(err, res, body) {
 
@@ -31,7 +31,7 @@ exports.get = function(api, callback) {
 
     // get access token error
     if(err) {
-      return callback(error.ACCESS_TOKEN_ERROR());
+      return callback(err);
     }
     request.get(url, function(err, res, body) {
 
