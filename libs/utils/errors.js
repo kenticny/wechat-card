@@ -23,6 +23,9 @@ var errors = {
   TOKEN_SERVICE_FORMAT_ERROR: function(err) {
     return {code: 9008, msg: "access token service format error, must be {access_token: \"\"}"}
   },
+  TOKEN_METHOD_TYPE_ERROR: function(err) {
+    return {code: 9009, msg: "token method have to be a function"};
+  },
   INTERFACE_ERROR: function(err) {
     return {code: err.errcode, msg: "wechat interface error: " + err.errmsg};
   }
