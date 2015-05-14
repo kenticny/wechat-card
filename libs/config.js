@@ -3,7 +3,8 @@ var request = require("request");
 var error = require("./utils/errors");
 
 var config = {
-  _token: true
+  _tokenFlag: "key", // service, method
+  format: "{access_token: $(accessToken)}"
 };
 
 var privateConfig = {
@@ -51,7 +52,12 @@ function setConfig(newConfig) {
     config.appSecret = newConfig.appSecret;
   } else if(newConfig.accessTokenService){
     config.accessTokenService = newConfig.accessTokenService;
-    config._token = false;
+    config.format = newConfig.format || config.format;
+    config._tokenFlag = "service";
+  } else if(newConfig.accessTokenMethod) {
+    config.accessTokenMethod = newConfig.accessTokenMethod;
+    config.format = newConfig.format || config.format;
+    config._tokenFlag = "method";
   } else {
     throw new Error("an error occurred when init access token");
   }
@@ -89,7 +95,10 @@ function getAccessToken(callback) {
 
   // parse response and return access token
   var returnsFunc = function(body, isNew, callback) {
-    var token = body.access_token;
+
+    var token = (typeof body === "string") ? 
+          JSON.parse(body).access_token : body.access_token;
+    
     if(isNew) {
       setPrivateConfig("access_token", {cred: token, expireTime: Date.now() });
     }
@@ -97,37 +106,49 @@ function getAccessToken(callback) {
     return;
   };
 
-  // get access token from wechat server or configure server
-  if(config._token) {
-
-    // from wechat server
-    if(privateConfig.access_token.cred && isNotExpire("access_token")) {
-      return returnsFunc({access_token: privateConfig.access_token.cred }, false, callback);
-    }
-    var accessTokenUrl = api.ACCESS_TOKEN + "&appid=" + config.appId + "&secret=" + config.appSecret;
-    request.post(accessTokenUrl, function(err, res, body) {
-      if(err) {
-        return callback(error.REQUEST_ERROR(err));
+  // get access token from wechat server or configure server or method
+  switch(config._tokenFlag) {
+    case "key":
+      // from wechat server
+      if(privateConfig.access_token.cred && isNotExpire("access_token")) {
+        return returnsFunc({access_token: privateConfig.access_token.cred }, false, callback);
       }
-      returnsFunc(body, true, callback);
-    });
-  }else {
-
-    // from custom server
-    request.get(config.accessTokenService, function(err, res, body) {
-      if(err) {
-        return callback(error.REQUEST_ERROR(err));
+      var accessTokenUrl = api.ACCESS_TOKEN + "&appid=" + config.appId + "&secret=" + config.appSecret;
+      request.post(accessTokenUrl, function(err, res, body) {
+        if(err) {
+          return callback(error.REQUEST_ERROR(err));
+        }
+        returnsFunc(body, true, callback);
+      });
+      break;
+    case "service":
+      // from custom server
+      request.get(config.accessTokenService, function(err, res, body) {
+        if(err) {
+          return callback(error.REQUEST_ERROR(err));
+        }
+        try {
+          body = JSON.parse(body);
+        } catch (e) {
+          body = null;
+        }
+        if(!body || !body.access_token) {
+          return callback(error.TOKEN_SERVICE_FORMAT_ERROR());
+        }
+        returnsFunc(body, false, callback);
+      });
+      break;
+    case "method":
+      if(config.accessTokenMethod && typeof config.accessTokenMethod === "function") {
+        config.accessTokenMethod(function(accessToken) {
+          var body = { access_token: accessToken };
+          returnsFunc(body, false, callback);
+        });
+      }else {
+        return callback(error.TOKEN_METHOD_TYPE_ERROR());
       }
-      try {
-        body = JSON.parse(body);
-      } catch (e) {
-        body = null;
-      }
-      if(!body || !body.access_token) {
-        return callback(error.TOKEN_SERVICE_FORMAT_ERROR());
-      }
-      returnsFunc(body, false, callback);
-    });
+      break;
+    default break;
   }
 }
 
