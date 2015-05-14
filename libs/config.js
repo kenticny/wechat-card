@@ -96,7 +96,8 @@ function getAccessToken(callback) {
   // parse response and return access token
   var returnsFunc = function(body, isNew, callback) {
 
-    var token = body.access_token;
+    var token = (typeof body === "string") ? 
+          JSON.parse(body).access_token : body.access_token;
     
     if(isNew) {
       setPrivateConfig("access_token", {cred: token, expireTime: Date.now() });
