@@ -1,6 +1,8 @@
 wechat-card
 ========================
 
+> Warning: this repo is to old that compared with the wechat official api, Please do the full test before use in production environment.
+
 [![NPM](https://nodei.co/npm/wechat-card.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/wechat-card/)
 
 [![Build Status](https://travis-ci.org/kenticny/wechat-card.svg?branch=master)](https://travis-ci.org/kenticny/wechat-card)
