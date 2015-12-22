@@ -1,6 +1,8 @@
 wechat-card
 ========================
 
+> 警告：本库使用接口已经与微信当前接口版本相差过多，不能保证可以正常使用，请在正式使用前对各个功能进行严格测试，确认无误后再生产环境使用。由于个人原因导致本库无法继续维护，深感抱歉。
+
 [![NPM](https://nodei.co/npm/wechat-card.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/wechat-card/)
 
 [![Build Status](https://travis-ci.org/kenticny/wechat-card.svg?branch=master)](https://travis-ci.org/kenticny/wechat-card)
